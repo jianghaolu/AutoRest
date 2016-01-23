@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Azure;
+using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
@@ -24,7 +25,8 @@ namespace Microsoft.Rest.Generator.Java
             // Do nothing   
         }
 
-        private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
+        private static string GetPagingSetting(ServiceClient serviceClient, Dictionary<string, object> extensions,
+            IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
         {
             // default value
             nextLinkName = null;
@@ -43,13 +45,18 @@ namespace Microsoft.Rest.Generator.Java
                 string className = (string)ext["className"];
                 if (string.IsNullOrEmpty(className))
                 {
+                    string package = serviceClient.Namespace.Split('.').Last();
+                    if (package == null)
+                    {
+                        package = "";
+                    }
                     if (pageClasses.Count > 0)
                     {
-                        className = String.Format(CultureInfo.InvariantCulture, "PageImpl{0}", pageClasses.Count);
+                        className = String.Format(CultureInfo.InvariantCulture, "{0}PagedList{1}", package.ToPascalCase(), pageClasses.Count);
                     }
                     else
                     {
-                        className = "PageImpl";
+                        className = String.Format(CultureInfo.InvariantCulture, "{0}PagedList", package.ToPascalCase()); ;
                     }
                 }
                 pageClasses.Add(keypair, className);
@@ -75,13 +82,13 @@ namespace Microsoft.Rest.Generator.Java
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
                 string nextLinkString;
-                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
+                string pageClassName = GetPagingSetting(serviceClient, method.Extensions, pageClasses, out nextLinkString);
                 if (string.IsNullOrEmpty(pageClassName))
                 {
                     continue;
                 }
                 var pageTypeFormat = "{0}<{1}>";
-                var ipageTypeFormat = "IPage<{0}>";
+                var ipageTypeFormat = "PagedList<{0}>";
 
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {

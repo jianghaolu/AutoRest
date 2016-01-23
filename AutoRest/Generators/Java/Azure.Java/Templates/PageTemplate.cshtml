@@ -20,9 +20,9 @@ package @(Settings.Namespace.ToLower()).models;
  * An instance of this class defines a page of Azure resources and a link to
  * get the next page of resources, if any.
  *
- * @@param <T> type of Azure resource
+ * @@param <E> type of Azure resource
  */
-public class @Model.TypeDefinitionName<T> implements Page<T> {
+public class @Model.TypeDefinitionName<E> extends PagedListTemplate<E> {
     /**
      * The link to the next page.
      */
@@ -33,7 +33,7 @@ public class @Model.TypeDefinitionName<T> implements Page<T> {
      * The list of items.
      */
     @@JsonProperty("@Model.ItemName")
-    private List<T> items;
+    private List<E> items;
     @EmptyLine
     /**
      * Gets the link to the next page.
@@ -51,7 +51,7 @@ public class @Model.TypeDefinitionName<T> implements Page<T> {
      * @@return the list of items in {@@link List}.
      */
     @@Override
-    public List<T> getItems() {
+    protected List<E> getItems() {
         return items;
     }
 }

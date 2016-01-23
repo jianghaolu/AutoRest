@@ -11,16 +11,16 @@
 package fixtures.paging.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.azure.Page;
+import com.microsoft.azure.PagedListTemplate;
 import java.util.List;
 
 /**
  * An instance of this class defines a page of Azure resources and a link to
  * get the next page of resources, if any.
  *
- * @param <T> type of Azure resource
+ * @param <E> type of Azure resource
  */
-public class PageImpl<T> implements Page<T> {
+public class PagingPagedList<E> extends PagedListTemplate<E> {
     /**
      * The link to the next page.
      */
@@ -31,7 +31,7 @@ public class PageImpl<T> implements Page<T> {
      * The list of items.
      */
     @JsonProperty("value")
-    private List<T> items;
+    private List<E> items;
 
     /**
      * Gets the link to the next page.
@@ -49,7 +49,7 @@ public class PageImpl<T> implements Page<T> {
      * @return the list of items in {@link List}.
      */
     @Override
-    public List<T> getItems() {
+    public List<E> getItems() {
         return items;
     }
 }
