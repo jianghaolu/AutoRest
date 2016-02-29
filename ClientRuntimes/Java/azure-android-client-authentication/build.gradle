@@ -5,6 +5,11 @@ buildscript {
         }
     }
 }
+
+plugins {
+    id 'net.researchgate.release' version '2.3.4'
+}
+
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
