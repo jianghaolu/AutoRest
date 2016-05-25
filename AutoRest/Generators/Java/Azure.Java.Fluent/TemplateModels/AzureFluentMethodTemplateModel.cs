@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
     {
         private AzureJavaFluentCodeNamer _namer;
 
-        public AzureFluentMethodTemplateModel(Method source, ServiceClient serviceClient)
+        public AzureFluentMethodTemplateModel(ClientModel.Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
             _namer = new AzureJavaFluentCodeNamer(serviceClient.Namespace);

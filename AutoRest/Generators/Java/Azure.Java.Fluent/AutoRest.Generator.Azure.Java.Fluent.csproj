@@ -30,6 +30,9 @@
     <Compile Include="AzureJavaFluentCodeNamer.cs" />
     <Compile Include="AzureJavaFluentCodeGenerator.cs" />
     <Compile Include="ClientModelExtensions.cs" />
+    <Compile Include="Fluent\EBNFParser.cs" />
+    <Compile Include="Fluent\Method.cs" />
+    <Compile Include="Fluent\Interface.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -40,9 +43,15 @@
     <Compile Include="TemplateModels\AzureFluentEnumTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureFluentMethodTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureFluentMethodGroupTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureFluentResourceTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureFluentServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureFluentModelTemplateModel.cs" />
     <Compile Include="TemplateModels\FluentPageTemplateModel.cs" />
+    <Compile Include="Templates\AzureServiceClientInterfaceTemplate.cs">
+      <DependentUpon>ResourceInterfaceTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Fluent\Chain.cs" />
+    <Compile Include="TypeModels\AzureFluentCompositeTypeModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
@@ -77,6 +86,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Templates\ResourceInterfaceTemplate.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
