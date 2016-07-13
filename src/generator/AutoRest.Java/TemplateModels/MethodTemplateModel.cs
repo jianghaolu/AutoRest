@@ -12,6 +12,7 @@ using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Java.TypeModels;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Java.TemplateModels
 {
@@ -111,9 +112,17 @@ namespace AutoRest.Java.TemplateModels
                 foreach (var parameter in OrderedRetrofitParameters)
                 {
                     StringBuilder declarationBuilder = new StringBuilder();
-                    if (Url.Contains("{" + parameter.Name + "}"))
+
+                    string pat = @".*\{" + parameter.SerializedName + @"(\:\w+)\}";
+                    Regex r = new Regex(pat);
+                    Match m = r.Match(Url);
+                    if (Url.Contains("{" + parameter.SerializedName + "}") || m.Success)
                     {
                         parameter.Location = ParameterLocation.Path;
+                        if (m.Success)
+                        {
+                            parameter.SerializedName += m.Groups[1].Value;
+                        }
                     }
                     if (parameter.Location == ParameterLocation.Path ||
                         parameter.Location == ParameterLocation.Query ||

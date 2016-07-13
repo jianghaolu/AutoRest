@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 import fixtures.url.models.UriColor;
 
@@ -151,7 +154,6 @@ public class PathsTests {
         client.paths().base64Url("lorem".getBytes());
     }
 
-    /*
     @Test
     public void arrayCsvInPath() throws Exception {
         List<String> arrayPath = new ArrayList<>();
@@ -159,9 +161,8 @@ public class PathsTests {
         arrayPath.add("begin!*'();:@ &=+$,/?#[]end");
         arrayPath.add(null);
         arrayPath.add("");
-        client.getPathsOperations().arrayCsvInPath(arrayPath);
+        client.paths().arrayCsvInPath(arrayPath);
     }
-    */
 
     @Test
     public void unixTimeUrl() throws Exception {
