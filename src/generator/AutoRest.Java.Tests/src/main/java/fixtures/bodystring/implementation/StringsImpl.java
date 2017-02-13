@@ -86,6 +86,10 @@ public class StringsImpl implements Strings {
         @PUT("string/whitespace")
         Observable<Response<ResponseBody>> putWhitespace(@Body String stringBody);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getUnquoted" })
+        @GET("string/unquoted")
+        Observable<Response<ResponseBody>> getUnquoted();
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getNotProvided" })
         @GET("string/notProvided")
         Observable<Response<ResponseBody>> getNotProvided();
@@ -658,6 +662,66 @@ public class StringsImpl implements Strings {
     private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get string value 'quick brown fox' unquoted.
+     *
+     * @return the String object if successful.
+     */
+    public String getUnquoted() {
+        return getUnquotedWithServiceResponseAsync().toBlocking().single().body();
+    }
+
+    /**
+     * Get string value 'quick brown fox' unquoted.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    public ServiceCall<String> getUnquotedAsync(final ServiceCallback<String> serviceCallback) {
+        return ServiceCall.fromResponse(getUnquotedWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get string value 'quick brown fox' unquoted.
+     *
+     * @return the observable to the String object
+     */
+    public Observable<String> getUnquotedAsync() {
+        return getUnquotedWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
+            @Override
+            public String call(ServiceResponse<String> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Get string value 'quick brown fox' unquoted.
+     *
+     * @return the observable to the String object
+     */
+    public Observable<ServiceResponse<String>> getUnquotedWithServiceResponseAsync() {
+        return service.getUnquoted()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
+                @Override
+                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<String> clientResponse = getUnquotedDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<String> getUnquotedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return this.client.restClient().responseBuilderFactory().<String, ErrorException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

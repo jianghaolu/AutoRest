@@ -270,6 +270,34 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
 
             /// <summary>
+            /// Get string value 'quick brown fox' unquoted
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static string GetUnquoted(this IStringModel operations)
+            {
+                return operations.GetUnquotedAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get string value 'quick brown fox' unquoted
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<string> GetUnquotedAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetUnquotedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Get String value when no string value is sent in response payload
             /// </summary>
             /// <param name='operations'>

@@ -76,6 +76,9 @@ var string = function (coverage) {
     } else if (req.params.scenario === 'whitespace') {
       coverage['getStringWithLeadingAndTrailingWhitespace']++;
       res.status(200).end('\"    Now is the time for all good men to come to the aid of their country    \"');
+    } else if (req.params.scenario === 'unquoted') {
+      coverage['getStringUnquoted']++;
+      res.status(200).end('quick brown fox');
     } else {
       res.status(400).end('Request path must contain null or empty or mbcs or whitespace');
     }

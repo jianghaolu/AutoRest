@@ -223,6 +223,30 @@
         }
       }
     },
+    "/string/unquoted": {
+      "get": {
+        "operationId": "string_getUnquoted",
+        "description": "Get string value 'quick brown fox' unquoted",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "quick brown fox value",
+            "schema": {
+              "type": "string",
+              "enum": [ "" ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/string/enum/notExpandable": {
       "get": {
         "operationId": "enum_getNotExpandable",

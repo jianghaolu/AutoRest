@@ -195,6 +195,7 @@ var coverage = {
   "putStringMultiByteCharacters": 0,
   "getStringWithLeadingAndTrailingWhitespace" : 0,
   "putStringWithLeadingAndTrailingWhitespace" : 0,
+  "getStringUnquoted": 0,
   "getStringNotProvided": 0,
   "getEnumNotExpandable": 0,
   "putEnumNotExpandable":0,

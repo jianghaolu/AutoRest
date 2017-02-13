@@ -80,6 +80,12 @@ public class StringOperationsTests {
     }
 
     @Test
+    public void getUnquoted() throws Exception {
+        String result = client.strings().getUnquoted();
+        Assert.assertEquals("quick brown fox", result);
+    }
+
+    @Test
     public void getNotProvided() throws Exception {
         try {
             client.strings().getNotProvided();

@@ -171,6 +171,22 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// </exception>
         Task<HttpOperationResponse> PutWhitespaceWithHttpMessagesAsync(string stringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Get string value 'quick brown fox' unquoted
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<HttpOperationResponse<string>> GetUnquotedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Get String value when no string value is sent in response payload
         /// </summary>
         /// <param name='customHeaders'>

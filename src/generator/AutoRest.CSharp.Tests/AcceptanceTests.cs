@@ -286,6 +286,7 @@ namespace AutoRest.CSharp.Tests
                     client.StringModel.GetWhitespace());
                 client.StringModel.PutWhitespace(
                     "    Now is the time for all good men to come to the aid of their country    ");
+                Assert.Equal("quick brown fox", client.StringModel.GetUnquoted());
                 Assert.Null(client.StringModel.GetNotProvided());
                 Assert.Equal(Colors.Redcolor, client.EnumModel.GetNotExpandable());
                 client.EnumModel.PutNotExpandable(Colors.Redcolor);

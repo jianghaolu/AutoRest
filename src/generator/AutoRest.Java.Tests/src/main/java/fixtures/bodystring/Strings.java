@@ -292,6 +292,35 @@ public interface Strings {
     Observable<ServiceResponse<Void>> putWhitespaceWithServiceResponseAsync(String stringBody);
 
     /**
+     * Get string value 'quick brown fox' unquoted.
+     *
+     * @return the String object if successful.
+     */
+    String getUnquoted();
+
+    /**
+     * Get string value 'quick brown fox' unquoted.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall<String> getUnquotedAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get string value 'quick brown fox' unquoted.
+     *
+     * @return the observable to the String object
+     */
+    Observable<String> getUnquotedAsync();
+
+    /**
+     * Get string value 'quick brown fox' unquoted.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getUnquotedWithServiceResponseAsync();
+
+    /**
      * Get String value when no string value is sent in response payload.
      *
      * @return the String object if successful.
